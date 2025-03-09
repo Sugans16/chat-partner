@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Input, Tooltip, Button } from "antd";
-import { UserOutlined, MailOutlined, LockOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { UserOutlined, MailOutlined, LockOutlined, InfoCircleOutlined, PhoneOutlined } from "@ant-design/icons";
 import backgroundImage from "../resources/images/5_asfasw112.jpg";
 import "../resources/css/signup.css";
 import "../resources/css/style.css";
@@ -42,7 +42,19 @@ const SignupPage = () => {
             }
           />
         </div>
-
+        <div className="input-group">
+          <label className="input-label">Phone Number:</label>
+          <Input type="number" min="0"
+            className="input-field"
+            placeholder="Enter your phone number"
+            prefix={<PhoneOutlined />}
+            suffix={
+              <Tooltip title="Enter your phone number">
+                <InfoCircleOutlined />
+              </Tooltip>
+            }
+          />
+        </div>
         <div className="input-group">
           <label className="input-label">Password</label>
           <Input.Password
