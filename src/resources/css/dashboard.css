@@ -1,0 +1,17 @@
+.dashboard-container {
+    text-align: center;
+    margin: auto;
+    padding: 5%;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  margin-top: 5%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  margin: 5px;
+}
