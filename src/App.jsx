@@ -6,7 +6,9 @@ import SignupPage from './main/registerPage';
 import DashBoard from './main/dashboard';
 import PlayGround from './main/playground';
 
+
 function App() {
+  
   return (
     <Provider store={store}>
       <Router>

@@ -1,7 +1,7 @@
 .dashboard-container {
     text-align: center;
     margin: auto;
-    padding: 5%;
+    padding: 2%;
 }
 
 .button-group {
@@ -14,4 +14,10 @@
 
 button {
   margin: 5px;
+}
+
+.dashboard-container h2{
+ display: flex;
+ align-items: center;
+ justify-content: center;
 }
