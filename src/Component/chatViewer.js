@@ -8,9 +8,9 @@ const chatComponent = ({ messages }) => {
         messages.map((msg, index) => (
           <div
             key={index}
-            className={`message ${msg.type === "user" ? "user-message" : "assistant-message"}`}
+            className={`message ${msg.role === "user" ? "user" : "assistant"}`}
           >
-            {msg.text}
+            {msg.content}
           </div>
         ))
       ) : (

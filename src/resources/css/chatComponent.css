@@ -9,12 +9,13 @@
     position: absolute;
     top: 10%;
     width: 100%;
-    max-width: 900px;
-    max-height: 500px;
+    max-width: 1000px;
+    max-height: 530px;
     background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    overflow-y: auto;
   }
   
   .message {
@@ -26,7 +27,7 @@
     font-size: 14px;
   }
   
-  .user-message {
+  .user {
     background-color: #007bff;
     align-self: flex-end;
     text-align: left;
@@ -34,7 +35,7 @@
     width: fit-content;
   }
   
-  .assistant-message {
+  .assistant {
     background-color: #333;
     align-self: flex-start;
     text-align: left;

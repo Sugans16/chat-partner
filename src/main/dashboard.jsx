@@ -17,15 +17,8 @@ import "../resources/css/dashboard.css";
 
 const Dashboard = () => {
   const { TextArea } = Input;
-  const messages = [
-    { type: "user", text: "Hey!.." },
-    { type: "assistant", text: "Hello, how can I help you?" },
-    {
-      type: "user",
-      text: "I need some help in coding, Do you think you can help me.?",
-    },
-    { type: "assistant", text: "Sure! What do you need help with?" },
-  ];
+  // const messages = [];
+  const [messages, setMessages] = useState([ ]);
   const chatList = [
     { id: 1, name: "Python Introduction", date: "2024-03-15" },
     { id: 2, name: "Greetings from Sudhan", date: "2024-03-14" },
@@ -47,12 +40,84 @@ const Dashboard = () => {
     checkLoggedInUser();
   }, [navigate]);
 
-  const handleSendMessage = () => {
+  // const handleSendMessage = () => {
+  //   if (textMessage.trim() !== "") {
+  //     console.log("Sending Message:", textMessage);
+  //     messages.push({
+  //       role: "user",
+  //       content: textMessage
+  //     })
+  //     var requestBody = {
+  //       "messages": messages,
+  //   "model": "llama-3.3-70b-versatile",
+  //   "temperature": 1,
+  //   "max_completion_tokens": 1024,
+  //   "top_p": 1,
+  //   "stream": true,
+  //   "stop": null
+  //     }
+  //     setTextMessage(""); 
+  //   }
+  // };
+  const handleSendMessage = async () => {
     if (textMessage.trim() !== "") {
       console.log("Sending Message:", textMessage);
+      const userMessage = {
+        role: "user",
+        content: textMessage
+      };
+  
+      // messages.push({
+      //   role: "user",
+      //   content: textMessage
+      // });
+      setMessages((prevMessages) => [...prevMessages, userMessage]);
+  
+      const requestBody = {
+        messages: [...messages, userMessage],
+        model: "llama-3.3-70b-versatile",
+        temperature: 1,
+        max_completion_tokens: 10000,
+        top_p: 1,
+        stream: false,
+        stop: null
+      };
+  
+      try {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer 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",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        console.log("AI Response:", data);
+        if (data.choices && data.choices.length > 0) {
+          // messages.push({
+          //   role: "assistant",
+          //   content: data.choices[0].message.content
+          // });
+          const assistantMessage = {
+            role: "assistant",
+            content: data.choices[0].message.content
+          };
+  
+          setMessages((prevMessages) => [...prevMessages, assistantMessage]);
+        }
+  
+      } catch (error) {
+        console.error("Error fetching response:", error);
+      }
+  
       setTextMessage(""); 
     }
   };
+  
 
   const handleLogout = async () => {
     if (loggedUser) {
