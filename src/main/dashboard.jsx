@@ -19,11 +19,9 @@ const Dashboard = () => {
   const { TextArea } = Input;
   // const messages = [];
   const [messages, setMessages] = useState([ ]);
-  const chatList = [
-    { id: 1, name: "Python Introduction", date: "2024-03-15" },
+  const [chatList, setChatList] = useState([ { id: 1, name: "Python Introduction", date: "2024-03-15" },
     { id: 2, name: "Greetings from Sudhan", date: "2024-03-14" },
-    { id: 3, name: "Welcome Greetings", date: "2024-03-12" },
-  ];
+    { id: 3, name: "Welcome Greetings", date: "2024-03-12" } ]);
   const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useState("");
   const [isLeftPanelVisible, setLeftPanelVisible] = useState(false);
@@ -40,25 +38,6 @@ const Dashboard = () => {
     checkLoggedInUser();
   }, [navigate]);
 
-  // const handleSendMessage = () => {
-  //   if (textMessage.trim() !== "") {
-  //     console.log("Sending Message:", textMessage);
-  //     messages.push({
-  //       role: "user",
-  //       content: textMessage
-  //     })
-  //     var requestBody = {
-  //       "messages": messages,
-  //   "model": "llama-3.3-70b-versatile",
-  //   "temperature": 1,
-  //   "max_completion_tokens": 1024,
-  //   "top_p": 1,
-  //   "stream": true,
-  //   "stop": null
-  //     }
-  //     setTextMessage(""); 
-  //   }
-  // };
   const handleSendMessage = async () => {
     if (textMessage.trim() !== "") {
       console.log("Sending Message:", textMessage);
@@ -66,11 +45,7 @@ const Dashboard = () => {
         role: "user",
         content: textMessage
       };
-  
-      // messages.push({
-      //   role: "user",
-      //   content: textMessage
-      // });
+
       setMessages((prevMessages) => [...prevMessages, userMessage]);
   
       const requestBody = {
@@ -98,10 +73,6 @@ const Dashboard = () => {
         const data = await response.json();
         console.log("AI Response:", data);
         if (data.choices && data.choices.length > 0) {
-          // messages.push({
-          //   role: "assistant",
-          //   content: data.choices[0].message.content
-          // });
           const assistantMessage = {
             role: "assistant",
             content: data.choices[0].message.content
